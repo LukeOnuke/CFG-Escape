@@ -1,0 +1,10 @@
+E:\Repos\OST\OST\bin\Debug\OST.exe.config
+E:\Repos\OST\OST\bin\Debug\OST.exe
+E:\Repos\OST\OST\bin\Debug\OST.pdb
+E:\Repos\OST\OST\obj\Debug\CFGE.csprojAssemblyReference.cache
+E:\Repos\OST\OST\obj\Debug\OST.mainWindow.resources
+E:\Repos\OST\OST\obj\Debug\OST.MessageProvider.resources
+E:\Repos\OST\OST\obj\Debug\OST.Properties.Resources.resources
+E:\Repos\OST\OST\obj\Debug\CFGE.csproj.GenerateResource.cache
+E:\Repos\OST\OST\obj\Debug\OST.exe
+E:\Repos\OST\OST\obj\Debug\OST.pdb
