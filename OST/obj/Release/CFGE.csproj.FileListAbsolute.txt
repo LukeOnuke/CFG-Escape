@@ -7,3 +7,4 @@ E:\Repos\OST\OST\obj\Release\OST.Properties.Resources.resources
 E:\Repos\OST\OST\obj\Release\CFGE.csproj.GenerateResource.cache
 E:\Repos\OST\OST\obj\Release\OST.exe
 E:\Repos\OST\OST\obj\Release\OST.pdb
+E:\Repos\OST\OST\obj\Release\CFGE.csprojAssemblyReference.cache

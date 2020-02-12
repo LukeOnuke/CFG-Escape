@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace OST
@@ -17,6 +10,7 @@ namespace OST
         Markup markup = new Markup();
         //temp valiue
         private string path;
+        private string textBoxTextC = " ";
         //-----------
 
         public mainWindow()
@@ -28,11 +22,30 @@ namespace OST
 
             toolStripStatusFile.Text = "Ready";
             textBox1.Text = (timer1.Interval / 1000).ToString();
+
+            string[] args = Environment.GetCommandLineArgs(); //getting the arguments
+            try
+            {
+                if (args.Length > 1 && !args[1].Contains("OST.exe")) //Args[1] contains the directory if the program is called to open a file
+                {
+                    ReadTextFile(args[1]);
+                }
+            }
+            catch (Exception e) { File.ShowMessage(e.ToString(), "Error"); }
+        }
+
+        public void ReadTextFile(string path)
+        {
+            toolStripStatusFile.Text = "Reading : " + path;
+            textContainer.Text = file.Read(path);
+            toolStripStatusFile.Text = path;
+
+            Markup.MarkupMake(textContainer);
         }
 
         private void TextContainer_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Control && e.KeyCode == Keys.S && path != null && path != "" && textContainer.Text != null) 
+            if (e.Control && e.KeyCode == Keys.S && path != null && path != "" && textContainer.Text != null)
             {
                 StatusLabel2.Text = "Saving";
                 file.Write(textContainer.Text, path);
@@ -45,7 +58,7 @@ namespace OST
             try
             {
                 File.Create(saveFileDialog2);
-                if (path != null) 
+                if (path != null)
                 {
                     path = saveFileDialog2.FileName;
                     toolStripStatusFile.Text = path;
@@ -75,7 +88,7 @@ namespace OST
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (textContainer.Text != null && path != null && path != "") 
+            if (textContainer.Text != null && path != null && path != "")
             {
                 file.Write(textContainer.Text, path);
             }
@@ -85,7 +98,7 @@ namespace OST
         {
             saveFileDialog1.ShowDialog();
             path = saveFileDialog1.FileName;
-            if (path != null && path != "") 
+            if (path != null && path != "")
             {
                 file.Write(textContainer.Text, path);
             }
@@ -94,7 +107,7 @@ namespace OST
         private void button2_Click(object sender, EventArgs e)
         {
             //reload file button
-            if (path != null && path != "" && textContainer.Text != null) 
+            if (path != null && path != "" && textContainer.Text != null)
             {
                 textContainer.Text = file.Read(path);
             }
@@ -103,7 +116,7 @@ namespace OST
         private void button3_Click(object sender, EventArgs e)
         {
             //remarkup
-            if (textContainer.Text != null && textContainer.Text != "") 
+            if (textContainer.Text != null && textContainer.Text != "")
             {
                 Markup.MarkupMake(textContainer);
             }
@@ -111,12 +124,13 @@ namespace OST
 
         private void timer1_Tick(object sender, EventArgs e)
         { // remarkupping
-            if (checkBox1.Checked) 
+            if (checkBox1.Checked && textContainer.Text != textBoxTextC)
             {
                 //remarkup
                 if (textContainer.Text != null && textContainer.Text != "")
                 {
                     Markup.MarkupMake(textContainer);
+                    textBoxTextC = textContainer.Text;
                 }
             }
         }
@@ -129,7 +143,7 @@ namespace OST
                 timer1.Interval = time;
             }
             catch (Exception ex)
-            { 
+            {
                 File.ShowMessage(ex.ToString(), "Error");
             }
         }

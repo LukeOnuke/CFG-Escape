@@ -20,6 +20,8 @@ namespace OST
 
         public static void MarkupMake(RichTextBox richTextBox) 
         {
+            int sl = richTextBox.SelectionStart;
+            // richTextBox.Enabled = false; //stop people from writing when markup event is happening
             
             HighlightText(richTextBox, "true", Color.FromArgb(0, 102, 204));
             HighlightText(richTextBox, "false", Color.FromArgb(0, 102, 204));
@@ -40,7 +42,11 @@ namespace OST
             richTextBox.SelectionLength = 0;
             richTextBox.SelectionColor = Color.White;
 
+            richTextBox.SelectionStart = sl; //get the marker to be back on the place where it was/*richTextBox.Text.Length;*/
+            richTextBox.SelectionLength = 0;
+            richTextBox.SelectionColor = Color.White;
 
+            richTextBox.Enabled = true;
         }
 
         public static void HighlightText(RichTextBox rtb, string text, Color? highlight = null)
@@ -82,11 +88,5 @@ namespace OST
 
 
         }
-
-
-        /*public string MarkupRemove() 
-        { 
-            
-        }*/
     }
 }
